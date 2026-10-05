@@ -9,7 +9,6 @@ cmd="${1:-status}"
 case "$cmd" in
   start|restart)
     hermes config set gateway.multiplex_profiles true >/dev/null
-    hermes gateway install >/dev/null 2>&1 || true
     hermes gateway "$cmd"
     sleep 5; hermes gateway status ;;
   stop|status)
