@@ -233,7 +233,7 @@ terminal: { backend: local, cwd: /home/<user>/hermes-team-workspace/coder, timeo
 
 | Переменная | Что |
 |---|---|
-| `ANTHROPIC_API_KEY` | ключ к Claude API |
+| `ANTHROPIC_API_KEY` | ключ к Anthropic API |
 | `TAVILY_API_KEY` | (необязательно) ключ веб-поиска |
 | `TELEGRAM_ALLOWED_USERS` | ваш числовой Telegram ID — кто может вызывать ботов |
 | `TELEGRAM_GROUP_CHAT_ID` | ID группы (отрицательное число `-100…`) — в какой группе боты работают |
