@@ -1,0 +1,45 @@
+# Hermes profile config for the CODER agent.
+
+model:
+  provider: openrouter
+  # Code-specialised model with good tool calling.
+  default: qwen/qwen3-coder
+
+# Needs: terminal, code_execution, file, skills, memory. Not needed: web, browser.
+agent:
+  disabled_toolsets:
+    - web
+    - browser
+    - image_gen
+    - tts
+    - delegation
+
+terminal:
+  backend: local          # switch to "docker" for isolation (see README)
+  cwd: ~/hermes-team-workspace/coder   # replaced with an absolute path by setup.sh
+  timeout: 120
+
+group_sessions_per_user: false
+
+telegram:
+  require_mention: true
+  exclusive_bot_mentions: true
+  bots_require_mention: true
+  observe_unmentioned_group_messages: false
+  mention_patterns: []
+  reactions: true
+
+gateway:
+  bot_loop_guard:
+    enabled: true
+    max_events: 20
+    window_seconds: 300
+    cooldown_seconds: 600
+
+memory:
+  memory_enabled: true          # e.g. "matplotlib needs Agg backend here"
+  user_profile_enabled: false
+  write_approval: false
+
+display:
+  memory_notifications: off

@@ -1,0 +1,40 @@
+# Hermes profile config for the RESEARCHER agent.
+
+model:
+  provider: openrouter
+  # Fast, cheap, long context: reads several web pages per task.
+  default: google/gemini-2.5-flash
+
+# Needs: web, skills, memory, session_search. Not needed: code / shell.
+agent:
+  disabled_toolsets:
+    - terminal
+    - code_execution
+    - image_gen
+    - tts
+    - delegation
+
+group_sessions_per_user: false
+
+telegram:
+  require_mention: true
+  exclusive_bot_mentions: true
+  bots_require_mention: true
+  observe_unmentioned_group_messages: false   # only sees tasks addressed to it
+  mention_patterns: []
+  reactions: true
+
+gateway:
+  bot_loop_guard:
+    enabled: true
+    max_events: 20
+    window_seconds: 300
+    cooldown_seconds: 600
+
+memory:
+  memory_enabled: true          # e.g. "statistics sites that worked well"
+  user_profile_enabled: false   # it never talks to the human directly
+  write_approval: false
+
+display:
+  memory_notifications: off

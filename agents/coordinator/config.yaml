@@ -1,0 +1,46 @@
+# Hermes profile config for the COORDINATOR agent.
+# Copied to ~/.hermes/profiles/coordinator/config.yaml by scripts/setup.sh.
+# Secrets (API key, bot token) live in the profile's .env, never here.
+
+model:
+  provider: openrouter
+  # Strong instruction-following + reliable tool calling: the coordinator must
+  # keep the protocol ([Tn], STATUS, no bot mentions in the final answer).
+  default: anthropic/claude-sonnet-4
+
+# The coordinator plans and routes; it should not do the specialists' work.
+agent:
+  disabled_toolsets:
+    - terminal
+    - code_execution
+    - browser
+    - image_gen
+    - tts
+
+# One shared "room brain" per group: the human's request and the bots'
+# RESULT messages must land in the SAME session, otherwise the coordinator
+# could not see the results it is waiting for (default is per-user sessions).
+group_sessions_per_user: false
+
+telegram:
+  require_mention: true              # only react when @mentioned / replied to
+  exclusive_bot_mentions: true       # "@researcher_bot ..." wakes only the researcher
+  bots_require_mention: true         # a bot must explicitly @mention us; quote-replies from bots are ignored
+  observe_unmentioned_group_messages: true   # see the whole thread as context without replying
+  mention_patterns: []
+  reactions: true                    # 👀 / 👍 / 👎 so the demo shows who is working
+
+gateway:
+  bot_loop_guard:                    # hard safety net against bot ping-pong
+    enabled: true
+    max_events: 20
+    window_seconds: 300
+    cooldown_seconds: 600
+
+memory:
+  memory_enabled: true               # MEMORY.md — team conventions, lessons learned
+  user_profile_enabled: true         # USER.md — the human's language / preferences
+  write_approval: false
+
+display:
+  memory_notifications: off          # keep the group chat clean
