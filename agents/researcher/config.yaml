@@ -13,6 +13,12 @@ agent:
     - image_gen
     - tts
     - delegation
+    - browser
+    - vision
+    - file
+    - todo
+    - clarify
+    - cronjob
 
 group_sessions_per_user: false
 
@@ -43,3 +49,7 @@ display:
 auxiliary:
   background_review:
     enabled: false
+
+# Web search backend (keyless, rate-limited). Add TAVILY_API_KEY in .env for higher limits.
+web:
+  backend: tavily
