@@ -52,3 +52,17 @@ Re-test result:
 ### F6 — Coordinator woke both specialists while describing the team
 **What happened:** answering "who is in your team?", the coordinator listed `@researcher…` and `@coder…`; Hermes (correctly) routed the message to both bots, which replied "ready for tasks".
 **Fix:** coordinator rule — a bot's @username may appear only as the first word of a TASK message; elsewhere use plain names.
+
+### F7 — Coder kept writing `@researcher` after the config was fixed
+**What happened:** after correcting `.env`, re-running `setup.sh`, restarting the gateway and `/new`, the coder still started its RESULT with `@researcher…`. Its SOUL.md, MEMORY.md and skills contained no researcher handle.
+**Root cause:** exporting the coder's session (`hermes -p coder sessions export --format trace`) showed its context still held its own earlier RESULT messages (written while the typo existed) and the coordinator's team list with all handles. The model copied its previous format over the instruction in SOUL.md; `/new` did not clear what the model saw.
+**Fix:** (1) coordinator wakes on a specialist's *reply* regardless of the @ (`bots_require_mention: false`, `exclusive_bot_mentions: false` for the coordinator only) — after this the chain reached `✅ FINAL ANSWER`; (2) `session_search` disabled for specialists; (3) session history wiped (moved `state.db*` to a backup with the gateway stopped).
+
+### F8 — A woken specialist cannot stay silent
+**What happened:** the researcher, woken by a wrong mention, replied "I stay silent on other bots' results…".
+**Root cause:** once a turn is dispatched, a small model always produces a message; "stay silent" in the prompt is not enforceable.
+**Fix:** remove the reason it was woken (F5/F7); rely on gateway filters, not prompts, for "who should respond".
+
+### F9 — SOUL.md edits not taking effect
+**Root cause:** the gateway loads profiles at start and a session keeps its prompt snapshot.
+**Fix (procedure):** `setup.sh` → restart gateway → `/new@<bot>` for every bot (or wipe `state.db`).

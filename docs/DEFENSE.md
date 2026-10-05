@@ -1,5 +1,8 @@
 # Шпаргалка к защите (≈10 минут)
 
+> Full, detailed preparation (all files explained, ~40 extra questions, demo script): see [DEFENSE-PREP.md](DEFENSE-PREP.md).
+
+
 Каждый участник должен уметь ответить на всё ниже. Ссылки на файлы — чтобы показать «вживую».
 
 ---
