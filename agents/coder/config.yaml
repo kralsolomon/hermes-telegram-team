@@ -1,9 +1,9 @@
 # Hermes profile config for the CODER agent.
 
 model:
-  provider: openrouter
-  # Code-specialised model with good tool calling.
-  default: qwen/qwen3-coder
+  provider: anthropic
+  # Strong at writing, running and fixing code with tools.
+  default: claude-sonnet-5-5
 
 # Needs: terminal, code_execution, file, skills, memory. Not needed: web, browser.
 agent:

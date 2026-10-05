@@ -11,7 +11,8 @@ command -v hermes >/dev/null || { echo "❌ hermes not found. Install: curl -fsS
 [[ -f "$REPO/.env" ]] || { echo "❌ $REPO/.env missing. cp .env.example .env and fill it in."; exit 1; }
 
 set -a; source "$REPO/.env"; set +a
-for v in OPENROUTER_API_KEY TELEGRAM_ALLOWED_USERS TELEGRAM_GROUP_CHAT_ID \
+[[ -n "${ANTHROPIC_API_KEY:-}" || -n "${OPENROUTER_API_KEY:-}" ]] || { echo "❌ set ANTHROPIC_API_KEY (or OPENROUTER_API_KEY) in .env"; exit 1; }
+for v in TELEGRAM_ALLOWED_USERS TELEGRAM_GROUP_CHAT_ID \
          COORDINATOR_BOT_TOKEN COORDINATOR_BOT_USERNAME \
          RESEARCHER_BOT_TOKEN RESEARCHER_BOT_USERNAME \
          CODER_BOT_TOKEN CODER_BOT_USERNAME; do
@@ -61,7 +62,6 @@ for a in "${AGENTS[@]}"; do
   # per-profile secrets
   umask 077
   cat > "$home/.env" <<EOF
-OPENROUTER_API_KEY=$OPENROUTER_API_KEY
 TELEGRAM_BOT_TOKEN=${TOKEN[$a]}
 TELEGRAM_ALLOWED_USERS=$TELEGRAM_ALLOWED_USERS
 TELEGRAM_GROUP_ALLOWED_CHATS=$TELEGRAM_GROUP_CHAT_ID
@@ -71,6 +71,8 @@ TELEGRAM_REQUIRE_MENTION=true
 TELEGRAM_EXCLUSIVE_BOT_MENTIONS=true
 EOF
   [[ "$a" == "researcher" && -n "${TAVILY_API_KEY:-}" ]] && echo "TAVILY_API_KEY=$TAVILY_API_KEY" >> "$home/.env"
+  [[ -n "${ANTHROPIC_API_KEY:-}" ]] && echo "ANTHROPIC_API_KEY=$ANTHROPIC_API_KEY" >> "$home/.env"
+  [[ -n "${OPENROUTER_API_KEY:-}" ]] && echo "OPENROUTER_API_KEY=$OPENROUTER_API_KEY" >> "$home/.env"
   umask 022
 done
 

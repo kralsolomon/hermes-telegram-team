@@ -1,9 +1,9 @@
 # Hermes profile config for the RESEARCHER agent.
 
 model:
-  provider: openrouter
-  # Fast, cheap, long context: reads several web pages per task.
-  default: google/gemini-2.5-flash
+  provider: anthropic
+  # Small, fast and cheap: reads several web pages per task, little reasoning needed.
+  default: claude-haiku-4-5-20251001
 
 # Needs: web, skills, memory, session_search. Not needed: code / shell.
 agent:

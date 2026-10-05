@@ -3,10 +3,10 @@
 # Secrets (API key, bot token) live in the profile's .env, never here.
 
 model:
-  provider: openrouter
+  provider: anthropic
   # Strong instruction-following + reliable tool calling: the coordinator must
   # keep the protocol ([Tn], STATUS, no bot mentions in the final answer).
-  default: anthropic/claude-sonnet-4
+  default: claude-sonnet-5-5
 
 # The coordinator plans and routes; it should not do the specialists' work.
 agent:

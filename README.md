@@ -2,11 +2,11 @@
 
 Three independent [Hermes Agent](https://github.com/NousResearch/hermes-agent) instances, each with its own Telegram bot, collaborate in one Telegram group by **@mentioning each other**.
 
-| Agent | Hermes profile | Model (OpenRouter) | Tools enabled | Job |
+| Agent | Hermes profile | Model (Anthropic API) | Tools enabled | Job |
 |---|---|---|---|---|
-| **Coordinator** | `coordinator` | `anthropic/claude-sonnet-4` | memory, session_search, skills, clarify, todo | Receives the human's request, plans subtasks, delegates, merges the final answer |
-| **Researcher** | `researcher` | `google/gemini-2.5-flash` | web (search/extract), memory, skills | Finds facts and numbers on the web, returns a short brief with sources |
-| **Coder** | `coder` | `qwen/qwen3-coder` | terminal, code_execution, file, memory, skills | Writes and runs Python: calculations, tables, matplotlib charts |
+| **Coordinator** | `coordinator` | `claude-sonnet-5-5` | memory, session_search, skills, clarify, todo | Receives the human's request, plans subtasks, delegates, merges the final answer |
+| **Researcher** | `researcher` | `claude-haiku-4-5-20251001` | web (search/extract), memory, skills | Finds facts and numbers on the web, returns a short brief with sources |
+| **Coder** | `coder` | `claude-sonnet-5-5` | terminal, code_execution, file, memory, skills | Writes and runs Python: calculations, tables, matplotlib charts |
 
 Use case: *"Ask a question that needs data **and** analysis"* — e.g. "Compare the population of Kazakhstan and Uzbekistan over the last 10 years and plot it", "Find the formula for compound interest and compute 500 000 ₸ at 14 % for 5 years with a chart", "What is the time complexity of Dijkstra with a binary heap? Benchmark it on random graphs".
 
@@ -63,7 +63,7 @@ source ~/.bashrc      # or ~/.zshrc
 hermes doctor
 ```
 
-You need an [OpenRouter](https://openrouter.ai) API key (any provider Hermes supports works — change `model:` in the configs).
+You need an [Anthropic API key](https://console.anthropic.com) (`ANTHROPIC_API_KEY`). Any other provider Hermes supports also works — e.g. set `provider: openrouter` in the configs and fill `OPENROUTER_API_KEY`.
 
 ### 2. Create three bots in @BotFather
 
