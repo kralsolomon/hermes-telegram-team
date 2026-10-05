@@ -117,9 +117,9 @@ hermes -p coder chat -q "compute 2**100 with python and print it"
 ### 6. Start the team
 
 ```bash
-./scripts/team.sh start     # 3 gateways = 3 processes, one per bot token
+./scripts/team.sh start     # one host gateway serves all 3 profiles (each with its own bot token)
 ./scripts/team.sh status
-./scripts/team.sh logs coordinator
+./scripts/team.sh logs
 ```
 
 For an always-on demo machine use `hermes -p <agent> gateway install` (systemd/launchd service per profile).

@@ -67,4 +67,4 @@ say "Starting the team"
 ./scripts/team.sh status
 echo
 echo "✅ Done. Write in the Telegram group: @<coordinator_bot> <your request>"
-echo "   Logs:  ~/hermes-telegram-team/scripts/team.sh logs coordinator"
+echo "   Logs:  ~/hermes-telegram-team/scripts/team.sh logs"
