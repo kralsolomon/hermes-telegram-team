@@ -22,6 +22,10 @@ done
 COORDINATOR_BOT_USERNAME="${COORDINATOR_BOT_USERNAME#@}"
 RESEARCHER_BOT_USERNAME="${RESEARCHER_BOT_USERNAME#@}"
 CODER_BOT_USERNAME="${CODER_BOT_USERNAME#@}"
+if [[ "$COORDINATOR_BOT_USERNAME" == "$RESEARCHER_BOT_USERNAME" || "$COORDINATOR_BOT_USERNAME" == "$CODER_BOT_USERNAME" || "$RESEARCHER_BOT_USERNAME" == "$CODER_BOT_USERNAME" ]]; then
+  echo "❌ two bots have the same username in .env — each agent needs its own bot"; exit 1
+fi
+echo "Usernames: coordinator=@$COORDINATOR_BOT_USERNAME researcher=@$RESEARCHER_BOT_USERNAME coder=@$CODER_BOT_USERNAME"
 
 declare -A DESC=(
   [coordinator]="Plans requests, delegates to researcher/coder via @mentions, writes the final answer."

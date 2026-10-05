@@ -45,8 +45,9 @@ Re-test result:
 ### F5 — Coder addressed its RESULT to the Researcher (2026-10-05, Haiku 4.5)
 **Request:** `@coordinator Посчитай сложные проценты: 500 000 тенге под 14% на 5 лет, график`
 **What happened:** coder computed correctly and sent the chart, but its message started with `@researcher… [T1] RESULT` instead of `@coordinator…`. The coordinator was never woken, so no `✅ FINAL ANSWER`; the researcher woke up instead and replied "I should stay silent…".
-**Root cause:** prompt + small model. The coder's SOUL.md contained the rule "Never mention @researcher…" — the only other handle in its prompt — and Haiku copied it. A small model also cannot "stay silent": once woken it always produces a message.
-**Fix:** removed other specialists' handles from specialist SOUL.md files entirely; the reply must start with an exact template `@coordinator [Tn] RESULT`.
+**Root cause (found with `cat ~/.hermes/profiles/coder/SOUL.md`):** a configuration typo — `.env` had `COORDINATOR_BOT_USERNAME` set to the *researcher's* username. `setup.sh` substituted it for `{{COORDINATOR}}`, so the coder's (and researcher's) SOUL.md literally told them "the Coordinator is @researcher…". The model followed its prompt correctly. Our first guess (the small model copying a handle from a "never mention" rule) was wrong — lesson: inspect the rendered prompt before blaming the model.
+**Fix:** corrected `.env`, re-ran `scripts/setup.sh`, reset sessions with `/new@<bot>` for each bot. Also removed other specialists' handles from specialist prompts (less chance of mis-addressing) and fixed the reply header to an exact template.
+**Prevention:** `setup.sh` now refuses to run if two of the three usernames are equal.
 
 ### F6 — Coordinator woke both specialists while describing the team
 **What happened:** answering "who is in your team?", the coordinator listed `@researcher…` and `@coder…`; Hermes (correctly) routed the message to both bots, which replied "ready for tasks".
