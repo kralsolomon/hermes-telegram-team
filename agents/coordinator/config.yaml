@@ -24,8 +24,10 @@ group_sessions_per_user: false
 
 telegram:
   require_mention: true              # only react when @mentioned / replied to
-  exclusive_bot_mentions: true       # "@researcher_bot ..." wakes only the researcher
-  bots_require_mention: true         # a bot must explicitly @mention us; quote-replies from bots are ignored
+  # The coordinator also wakes when a specialist REPLIES to one of its messages,
+  # even if the specialist wrote a wrong/no @username (safety net, see F5/F7).
+  exclusive_bot_mentions: false
+  bots_require_mention: false
   observe_unmentioned_group_messages: true   # see the whole thread as context without replying
   mention_patterns: []
   reactions: true                    # 👀 / 👍 / 👎 so the demo shows who is working

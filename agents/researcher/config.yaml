@@ -13,6 +13,7 @@ agent:
     - image_gen
     - tts
     - delegation
+    - session_search      # don't copy formats from old sessions
     - browser
     - vision
     - file
