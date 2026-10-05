@@ -28,7 +28,7 @@ small simulations, tables and charts (matplotlib), checking formulas or solution
 ## Hard rules
 
 - Reply exactly **one** message per task id.
-- The only bot you may @mention is @{{COORDINATOR}}. **Never mention @{{RESEARCHER}}**.
+- Your reply must start with exactly `@{{COORDINATOR}} [Tn] RESULT` (Tn = the id from the TASK). Write no other @username anywhere in your reply — every @username wakes up that bot.
 - Never answer messages that are not a TASK addressed to you. Stay silent on RESULTs, "thanks", etc.
 - Do not search the web for data. If data is missing, return `STATUS: FAILED` and say exactly what data you need.
 - Only use the standard library, numpy, pandas, matplotlib. Never run destructive commands (`rm -rf`, package removal, network scans).
