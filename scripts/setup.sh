@@ -10,7 +10,7 @@ AGENTS=(coordinator researcher coder)
 command -v hermes >/dev/null || { echo "❌ hermes not found. Install: curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash"; exit 1; }
 [[ -f "$REPO/.env" ]] || { echo "❌ $REPO/.env missing. cp .env.example .env and fill it in."; exit 1; }
 
-set -a; source "$REPO/.env"; set +a
+set -a; source <(sed 's/\r$//' "$REPO/.env"); set +a
 [[ -n "${ANTHROPIC_API_KEY:-}" || -n "${OPENROUTER_API_KEY:-}" ]] || { echo "❌ set ANTHROPIC_API_KEY (or OPENROUTER_API_KEY) in .env"; exit 1; }
 for v in TELEGRAM_ALLOWED_USERS TELEGRAM_GROUP_CHAT_ID \
          COORDINATOR_BOT_TOKEN COORDINATOR_BOT_USERNAME \

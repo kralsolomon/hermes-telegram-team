@@ -43,8 +43,10 @@ agents/
   researcher/   SOUL.md  config.yaml  skills/source-brief/SKILL.md
   coder/        SOUL.md  config.yaml  skills/analysis-run/SKILL.md
 scripts/
+  bootstrap.sh  # one-shot: install Hermes + setup + start
   setup.sh      # creates the 3 Hermes profiles and installs SOUL/config/skills/.env
   team.sh       # start | stop | restart | status | logs <agent>
+windows/        # double-click launchers for WSL
 docs/
   DEFENSE.md        # answers to the defense questions
   FAILURE-LOG.md    # failed requests we observed and how we fixed them
@@ -53,7 +55,15 @@ docs/
 
 No API keys or bot tokens are stored in the repo. `SOUL.md` files use `{{COORDINATOR}}`, `{{RESEARCHER}}`, `{{CODER}}` placeholders that `setup.sh` replaces with your bots' usernames.
 
-## Setup
+## Quick start on Windows (WSL)
+
+1. Unzip the project anywhere on C: and fill `.env` (copy `.env.example`; Notepad is fine).
+2. Double-click `windows/1-install-and-start.cmd`. It runs `scripts/bootstrap.sh` inside WSL: installs Hermes, copies the project to `~/hermes-telegram-team` in Linux, creates the profiles, opens the web-search menu, runs a smoke test and starts the three gateways.
+3. Later: `2-start-team.cmd`, `3-stop-team.cmd`, `4-logs-coordinator.cmd`.
+
+Linux / macOS: `./scripts/bootstrap.sh` does the same.
+
+## Setup (manual)
 
 ### 1. Install Hermes Agent (Linux / macOS / WSL2)
 
