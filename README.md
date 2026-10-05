@@ -4,9 +4,9 @@ Three independent [Hermes Agent](https://github.com/NousResearch/hermes-agent) i
 
 | Agent | Hermes profile | Model (Anthropic API) | Tools enabled | Job |
 |---|---|---|---|---|
-| **Coordinator** | `coordinator` | `claude-sonnet-5-5` | memory, session_search, skills, clarify, todo | Receives the human's request, plans subtasks, delegates, merges the final answer |
+| **Coordinator** | `coordinator` | `claude-haiku-4-5-20251001` | memory, session_search, skills, clarify, todo | Receives the human's request, plans subtasks, delegates, merges the final answer |
 | **Researcher** | `researcher` | `claude-haiku-4-5-20251001` | web (search/extract), memory, skills | Finds facts and numbers on the web, returns a short brief with sources |
-| **Coder** | `coder` | `claude-sonnet-5-5` | terminal, code_execution, file, memory, skills | Writes and runs Python: calculations, tables, matplotlib charts |
+| **Coder** | `coder` | `claude-haiku-4-5-20251001` | terminal, code_execution, file, memory, skills | Writes and runs Python: calculations, tables, matplotlib charts |
 
 Use case: *"Ask a question that needs data **and** analysis"* — e.g. "Compare the population of Kazakhstan and Uzbekistan over the last 10 years and plot it", "Find the formula for compound interest and compute 500 000 ₸ at 14 % for 5 years with a chart", "What is the time complexity of Dijkstra with a binary heap? Benchmark it on random graphs".
 

@@ -38,3 +38,8 @@ memory:
 
 display:
   memory_notifications: off
+
+# Saves tokens: no background self-review after every turn
+auxiliary:
+  background_review:
+    enabled: false

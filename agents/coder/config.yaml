@@ -3,7 +3,7 @@
 model:
   provider: anthropic
   # Strong at writing, running and fixing code with tools.
-  default: claude-sonnet-5-5
+  default: claude-haiku-4-5-20251001
 
 # Needs: terminal, code_execution, file, skills, memory. Not needed: web, browser.
 agent:
@@ -43,3 +43,8 @@ memory:
 
 display:
   memory_notifications: off
+
+# Saves tokens: no background self-review after every turn
+auxiliary:
+  background_review:
+    enabled: false

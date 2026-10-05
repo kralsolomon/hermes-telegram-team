@@ -6,7 +6,7 @@ model:
   provider: anthropic
   # Strong instruction-following + reliable tool calling: the coordinator must
   # keep the protocol ([Tn], STATUS, no bot mentions in the final answer).
-  default: claude-sonnet-5-5
+  default: claude-haiku-4-5-20251001
 
 # The coordinator plans and routes; it should not do the specialists' work.
 agent:
@@ -44,3 +44,8 @@ memory:
 
 display:
   memory_notifications: off          # keep the group chat clean
+
+# Saves tokens: no background self-review after every turn
+auxiliary:
+  background_review:
+    enabled: false
